@@ -19,7 +19,7 @@ void Memory(int*& arr, int& size) {
 	if (arr != nullptr)
 	{
 		delete[] arr;
-	}
+	} 
 	arr = new int[size];
 }
 void Fill(int*& arr, int& size) {
