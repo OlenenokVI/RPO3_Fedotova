@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="RPO3_Fedotova/RPO3_Fedotova.vcxproj" />
+  <Project Path="RPO3_Fedotova/RPO3_Fedotova.vcxproj" Id="7e6153e4-7d80-4455-9869-80e2de5692f0" />
 </Solution>
