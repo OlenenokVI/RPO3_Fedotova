@@ -1,8 +1,10 @@
 #define NOMINMAX
-#include <iostream>
+#include "Test.hpp"
 #include <windows.h>
 #include <string>
 #include <limits>
+#include <io.h>		// _setmode, _fileno
+#include <fcntl.h>	// _O_U16TEXT
 
 /*
 void PushArray(int *&arr, int &size)
@@ -49,9 +51,65 @@ void Delete(int*& arr) {
 
 
 int main(){
-	SetConsoleCP(CP_UTF8);
-	SetConsoleOutputCP(CP_UTF8); //1251 CP_UTF8
-	srand(time(NULL));
+	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
+
+	
+	PrintHello();
+	system("pause");
+
+	// изменения из-за сетмод
+	/*
+	std::string			std::wstring		широкая строка
+	char				wchar_t
+	std::cout			std::wcout
+	std::cin			std::wcin
+	"text"				L"text"
+	'f'					L'f'
+
+
+	std::wstring one, two;
+	std::wcout << L"Введите текст: ";
+	std::getline(std::wcin, one, L'\n');
+	std::wcout << L"Введите текст: ";
+	std::getline(std::wcin, two, L'\n');
+	std::wcout << one << L'\n' << two << std::endl;
+
+	*/
+
+	std::wstring name = L"Hello world\n";
+	std::wcout << name;
+
+	// найти слово в строке (индекс первой буквы)
+	size_t position = name.find(L"world");
+	std::wcout << position << L"\n\n";
+	if (position != std::wstring::npos)
+	{
+		std::wcout << L"слово найдено юхуууу" << L"\n";
+	}
+
+	// возврат какого-то участка строки (с какого индекса, сколько символа читатать)
+	std::wcout << name.substr(4, 5) << L"\n\n";
+
+	// вырезка
+	name.erase(4, 5);
+	std::wcout << name << L'\n';
+
+	// вставка
+	name.insert(3, L"   Привет Мир   ");
+	std::wcout << name << L'\n';
+
+	// замена (с какого индекса начать, сколько слов вырезать, что вставить
+	name.replace(5, 4, L"Толя ");
+	std::wcout << name << L"\n\n";
+
+	name.clear();
+	if (name.empty())
+	{
+		std::wcout << L"Строка пустая(\n\n";
+	}
+
+
 
 	// откладка
 	/*
@@ -97,7 +155,8 @@ int main(){
 		system("pause");
 	}
 	*/
-
+	//регистрация и вход
+	/*
 	while (true)
 	{
 		system("cls");
@@ -171,14 +230,7 @@ int main(){
 			system("pause");
 		}
 	}
-	
-
-
-
-
-
-
-
+	*/
 
 	/*
 	int size = 5;
