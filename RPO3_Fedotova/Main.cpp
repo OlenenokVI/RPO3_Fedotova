@@ -6,8 +6,7 @@
 #include <io.h>		// _setmode, _fileno
 #include <fcntl.h>	// _O_U16TEXT
 
-/*
-void PushArray(int *&arr, int &size)
+void PushArray(int*& arr, int& size)
 {
 	size++;
 	int* temp = new int[size] {};
@@ -18,6 +17,52 @@ void PushArray(int *&arr, int &size)
 	temp[size - 1] = 100;
 	delete[] arr;
 	arr = temp;
+}
+
+void GetIn(int*& arr, int& size, int index)
+{
+	if (index < 0 || index > size) {
+		return;
+	}
+	int newSize = size + 1;
+	int* temp = new int[newSize] {};
+	int j = 0;
+	for (int i = 0; i < newSize; i++)
+	{
+		if (i == index)
+		{
+			temp[i] = 24;
+		}
+		else {
+			temp[i] = arr[j++];
+		}
+	}
+	delete[] arr;
+	arr = temp;
+	size = newSize;
+}
+
+void GetOff(int*& arr, int& size, int index)
+{
+	if (index < 0 || index >= size) {
+		return;
+	}
+	int newSize = size - 1;
+	int* temp = new int[newSize] {};
+	int j = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (i == index)
+		{
+			continue;
+		}
+		else {
+			temp[j++] = arr[i];
+		}
+	}
+	delete[] arr;
+	arr = temp;
+	size = newSize;
 }
 
 void Memory(int*& arr, int& size) {
@@ -34,9 +79,10 @@ void Fill(int*& arr, int& size) {
 	}
 }
 void Print(int*& arr, int& size) {
+	std::wcout << L"Рандомный массив: ";
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << arr[i] << " ";
+		std::wcout << arr[i] << L" ";
 	}
 }
 void Delete(int*& arr) {
@@ -47,16 +93,12 @@ void Delete(int*& arr) {
 	delete[] arr;
 	arr = nullptr;
 }
-*/
 
 
-int main(){
+
+int main() {
 	_setmode(_fileno(stdin), _O_U16TEXT);
 	_setmode(_fileno(stdout), _O_U16TEXT);
-
-	
-	PrintHello();
-	system("pause");
 
 	// изменения из-за сетмод
 	/*
@@ -76,7 +118,7 @@ int main(){
 	std::wcout << one << L'\n' << two << std::endl;
 
 	*/
-
+	/*
 	std::wstring name = L"Hello world\n";
 	std::wcout << name;
 
@@ -108,7 +150,7 @@ int main(){
 	{
 		std::wcout << L"Строка пустая(\n\n";
 	}
-
+	*/
 
 
 	// откладка
@@ -155,6 +197,8 @@ int main(){
 		system("pause");
 	}
 	*/
+
+
 	//регистрация и вход
 	/*
 	while (true)
@@ -232,7 +276,8 @@ int main(){
 	}
 	*/
 
-	/*
+
+
 	int size = 5;
 	int* ptr = nullptr;
 
@@ -240,7 +285,42 @@ int main(){
 	Fill(ptr, size);
 	Print(ptr, size);
 	Delete(ptr);
-	*/
+
+	int* name = new int[size] {3, 1, 2, 6, 9};
+	std::wcout << L"\n\n";
+	std::wcout << L"До добавления: ";
+
+	for (int i = 0; i < size; i++)
+	{
+		std::wcout << name[i] << L" ";
+	}
+	std::wcout << L"\n";
+	PushArray(name, size);
+
+	std::wcout << L"После добавления в конец: ";
+	for (int i = 0; i < size; i++)
+	{
+		std::wcout << name[i] << L" ";
+	}
+
+	int index_GetIn = 3;
+	GetIn(name, size, index_GetIn);
+	std::wcout << L"\nПосле добавления по индексу: ";
+	for (int i = 0; i < size; i++)
+	{
+		std::wcout << name[i] << L" ";
+	}
+
+	int index_GetOff = 5;
+	GetOff(name, size, index_GetOff);
+	std::wcout << L"\nПосле удаления по индексу: ";
+	for (int i = 0; i < size; i++)
+	{
+		std::wcout << name[i] << L" ";
+	}
+
+	std::wcout << L"\n\n";
+	Delete(name);
 	return 0;
 }
 
